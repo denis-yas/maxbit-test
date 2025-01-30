@@ -5,7 +5,7 @@ export default {
   routes: (_routes) => [
     {
       name: 'home',
-      path: '/:param?',
+      path: '/:type?',
       component: () => import('~/pages/index.vue')
     }
   ],
