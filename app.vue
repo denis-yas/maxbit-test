@@ -6,11 +6,7 @@ import { NuxtPage } from '#components';
 <template>
   <header>Коктейли</header>
   <div class="layout">
-    <nav>
-      <ul>
-        <li><NuxtLink to="/about">About</NuxtLink></li>
-      </ul>
-    </nav>
+    <cocktails-list/>
     <NuxtPage class="layout__content"/>
   </div>
 </template>
