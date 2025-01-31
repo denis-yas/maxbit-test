@@ -1,6 +1,8 @@
 import type { CocktailDto } from './cocktail-dto.model';
 
 export type Cocktail = CocktailDto & {
-  ingredients: string[];
-  measures: string[];
+  ingredients: {
+    ingredient: string;
+    measure: string;
+  }[];
 };

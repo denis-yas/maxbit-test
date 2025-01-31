@@ -16,8 +16,10 @@
         <section>
           <h3>List of ingredients:</h3>
           <dl>
-            <dt>{{ item.strMeasure1 }}</dt>
-            <dd>{{ item.strIngredient1 }}</dd>
+            <template v-for="ingredient of item.ingredients" :key="ingredient">
+              <dt>{{ ingredient.measure }}</dt>
+              <dd>{{ ingredient.ingredient }}</dd>
+            </template>
           </dl>
         </section>
       </li>

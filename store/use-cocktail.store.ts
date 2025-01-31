@@ -10,14 +10,14 @@ import {
 
 import { availableCocktails } from '~/consts/availableCocktails.const';
 import { convertCocktailDTO } from './convert-cocktail-dto';
-import type { CocktailDto } from '~/entities/cocktail-dto.model';
 import type { CocktailsDto } from '~/entities/cocktails-dto.model';
+import type { Cocktail } from '~/entities/cocktail.model';
 
 const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php';
 
 export const useCocktailStore = defineStore('cocktail', () => {
   const currentCode: Ref<string> = ref('');
-  const cocktails: Ref<CocktailDto[]> = ref([]);
+  const cocktails: Ref<Cocktail[]> = ref([]);
   const setSubject$ = new Subject<string>();
 
   setSubject$
