@@ -2,20 +2,22 @@ import { defineStore } from 'pinia';
 import {
   distinctUntilChanged,
   from,
+  map,
   Subject,
   switchMap,
   withLatestFrom,
 } from 'rxjs';
 
 import { availableCocktails } from '~/consts/availableCocktails.const';
-import type { Cocktail } from '~/entities/cocktail.model';
+import { convertCocktailDTO } from './convert-cocktail-dto';
+import type { CocktailDto } from '~/entities/cocktail-dto.model';
 import type { CocktailsDto } from '~/entities/cocktails-dto.model';
 
 const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php';
 
 export const useCocktailStore = defineStore('cocktail', () => {
   const currentCode: Ref<string> = ref('');
-  const cocktails: Ref<Cocktail[]> = ref([]);
+  const cocktails: Ref<CocktailDto[]> = ref([]);
   const setSubject$ = new Subject<string>();
 
   setSubject$
@@ -30,11 +32,12 @@ export const useCocktailStore = defineStore('cocktail', () => {
           }) as Promise<CocktailsDto>
         )
       ),
+      map((a) => a.drinks?.map(convertCocktailDTO) || []),
       withLatestFrom(setSubject$)
     )
     .subscribe(([response, code]) => {
       currentCode.value = code;
-      cocktails.value = response.drinks;
+      cocktails.value = response;
     });
 
   const set = (newCode: string) => {

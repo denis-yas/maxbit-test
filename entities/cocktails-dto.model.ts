@@ -1,5 +1,5 @@
-import type { Cocktail } from './cocktail.model';
+import type { CocktailDto } from './cocktail-dto.model';
 
 export interface CocktailsDto {
-  drinks: Cocktail[];
+  drinks: CocktailDto[];
 }
