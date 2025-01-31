@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { NuxtPage } from '#components';
-
+import { NuxtPage } from "#components";
 </script>
 
 <template>
   <header>Коктейли</header>
   <div class="layout">
-    <cocktails-list/>
-    <NuxtPage class="layout__content"/>
+    <cocktails-list />
+    <NuxtPage class="layout__content" />
   </div>
 </template>
 
@@ -20,5 +19,4 @@ import { NuxtPage } from '#components';
   background-color: red;
   flex-grow: 1;
 }
-
 </style>
