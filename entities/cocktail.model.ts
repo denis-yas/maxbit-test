@@ -4,12 +4,12 @@ export type Cocktail = {
   strAlcoholic: string | null;
   strCategory: string | null;
   strCreativeCommonsConfirmed: string | null;
-  strDrink: string | null;
+  strDrink: string;
   strDrinkAlternate: null;
-  strDrinkThumb: string | null;
+  strDrinkThumb: string;
   strGlass: string | null;
   strIBA: string | null;
-  strImageAttribution: string | null;
+  strImageAttribution: string;
   strImageSource: string | null;
   strIngredient1: string | null;
   strIngredient2: string | null;
