@@ -8,32 +8,32 @@ import {
 } from 'rxjs';
 
 import { availableCocktails } from '~/consts/availableCocktails.const';
+import type { Cocktail } from '~/entities/cocktail.model';
 
-const url =
-  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=<cocktail_code>';
+const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php';
 
 export const useCocktailStore = defineStore('cocktail', () => {
   const currentCode: Ref<string> = ref('');
+  const cocktails: Ref<Cocktail[]> = ref([]);
   const setSubject$ = new Subject<string>();
 
   setSubject$
     .pipe(
       distinctUntilChanged(),
-      switchMap((newCode) => {
-        const a = from(
+      switchMap((newCode) =>
+        from(
           $fetch(url, {
             query: {
               s: newCode,
             },
           })
-        );
-        return a;
-      }),
+        )
+      ),
       withLatestFrom(setSubject$)
     )
     .subscribe(([a, b]) => {
       currentCode.value = b;
-      console.log(a);
+      cocktails.value = a as Cocktail[];
     });
 
   const set = (newCode: string) => {
