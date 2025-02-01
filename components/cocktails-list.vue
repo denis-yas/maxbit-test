@@ -1,9 +1,9 @@
 <template>
   <nav>
     <ul>
-      <li v-for="item of availableCocktails" :key="item">
-        <NuxtLink :to="{ path: '/' + item }" active-class="!bg-red-700 t"
-          class="pl-4 pr-4 bg-sky-500 hover:bg-sky-700 block">
+      <li v-for="item of availableCocktails" :key="item" class="h-16">
+        <NuxtLink :to="{ path: '/' + item }" active-class="!bg-red-700 t" class="pl-4 pr-4 bg-sky-500
+           hover:bg-sky-700 h-full capitalize flex items-center text-2xl">
           {{ item }}</NuxtLink>
       </li>
     </ul>
