@@ -30,11 +30,12 @@
 <script setup lang="ts">
 import { useCocktailStore } from "~/store/use-cocktail.store";
 
-definePageMeta({
-  validate: async (route) => {
-    return typeof route.params.id === 'string' && /^\d+$/.test(route.params.id)
-  }
-});
+// definePageMeta({
+//   validate: async (route) => {
+//     const result = typeof route.params.id === 'string' && /^\d+$/.test(route.params.id);
+//     return result;
+//   }
+// });
 
 
 const route = useRoute();

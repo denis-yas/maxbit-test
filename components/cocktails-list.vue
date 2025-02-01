@@ -2,9 +2,7 @@
   <nav>
     <ul>
       <li v-for="item of availableCocktails" :key="item">
-        <NuxtLink :to="{ name: 'home', params: { type: item } }">{{
-          item
-        }}</NuxtLink>
+        <NuxtLink :to="{ path: '/' + item }">{{ item }}</NuxtLink>
       </li>
     </ul>
   </nav>
