@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 import {
   catchError,
   distinctUntilChanged,
@@ -9,17 +9,17 @@ import {
   Subject,
   switchMap,
   withLatestFrom,
-} from 'rxjs';
-import { testData } from '~/mocks/response';
+} from "rxjs";
+import { testData } from "~/mocks/response";
 
-import type { Cocktail } from '~/entities/cocktail.model';
-import type { CocktailsDto } from '~/entities/cocktails-dto.model';
-import { convertCocktailDTO } from './convert-cocktail-dto';
+import type { Cocktail } from "~/entities/cocktail.model";
+import type { CocktailsDto } from "~/entities/cocktails-dto.model";
+import { convertCocktailDTO } from "./convert-cocktail-dto";
 
-const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php';
+const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php";
 
-export const useCocktailStore = defineStore('cocktail', () => {
-  const currentCode: Ref<string> = ref('');
+export const useCocktailStore = defineStore("cocktail", () => {
+  const currentCode: Ref<string> = ref("");
   const cocktails: Ref<Cocktail[]> = ref([]);
   const setSubject$ = new Subject<string>();
 
@@ -46,10 +46,10 @@ export const useCocktailStore = defineStore('cocktail', () => {
       catchError((e: Error) => {
         showError({
           statusCode: 500,
-          statusMessage: e.message || 'Something bad has happened',
+          statusMessage: e.message || "Something bad has happened",
         });
         return EMPTY;
-      })
+      }),
     )
     .subscribe(([response, code]) => {
       currentCode.value = code;

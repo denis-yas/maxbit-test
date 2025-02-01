@@ -4,7 +4,7 @@ import { availableCocktails } from './consts/availableCocktails.const';
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: false },
-  modules: ['@pinia/nuxt', '@nuxt/eslint'],
+  modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxtjs/tailwindcss'],
   build: {
     transpile: ['rxjs'],
   },
