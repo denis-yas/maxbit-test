@@ -1,22 +1,12 @@
 <script setup lang="ts">
 import { NuxtPage } from "#components";
+import CocktailsList from './components/cocktails-list.vue';
 </script>
-
 <template>
-  <header>Коктейли</header>
-  <div class="layout">
-    <cocktails-list />
-    <NuxtPage class="layout__content" />
+  <div class="max-w-[1024px] m-auto mt-8 min-h-screen border">
+    <div class="flex">
+      <cocktails-list class="pt-8 border-r-2" />
+      <NuxtPage class="pt-8 pl-8 flex-grow" />
+    </div>
   </div>
 </template>
-
-<style>
-.layout {
-  display: flex;
-}
-
-.layout__content {
-  background-color: red;
-  flex-grow: 1;
-}
-</style>
