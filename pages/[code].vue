@@ -43,5 +43,5 @@ definePageMeta({
 
 const route = useRoute();
 const store = useCocktailStore();
-store.set(route.params.type as string);
+store.set(route.params.code as string);
 </script>
