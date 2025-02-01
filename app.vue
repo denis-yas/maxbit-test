@@ -5,8 +5,8 @@ import CocktailsList from './components/cocktails-list.vue';
 <template>
   <div class="max-w-[1024px] m-auto mt-8 min-h-screen border">
     <div class="flex">
-      <cocktails-list class="pt-8 border-r-2" />
-      <NuxtPage class="pt-8 pl-8 flex-grow" />
+      <cocktails-list class="pt-8 border-r-2 w-64 flex-shrink-0" />
+      <NuxtPage class="pt-8 pl-8 pr-8 flex-grow" />
     </div>
   </div>
 </template>
