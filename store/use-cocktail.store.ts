@@ -35,7 +35,7 @@ export const useCocktailStore = defineStore('cocktail', () => {
       ),
       map((a) => {
         if (!Array.isArray(a.drinks)) {
-          throw new Error('data not found');
+          throw new Error(a.drinks || 'data not found');
         }
         return a.drinks.map(convertCocktailDTO);
       }),
