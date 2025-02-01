@@ -2,18 +2,17 @@ import { defineStore } from 'pinia';
 import {
   catchError,
   distinctUntilChanged,
+  EMPTY,
   from,
   map,
-  of,
   Subject,
   switchMap,
   withLatestFrom,
 } from 'rxjs';
 
-import { availableCocktails } from '~/consts/availableCocktails.const';
-import { convertCocktailDTO } from './convert-cocktail-dto';
-import type { CocktailsDto } from '~/entities/cocktails-dto.model';
 import type { Cocktail } from '~/entities/cocktail.model';
+import type { CocktailsDto } from '~/entities/cocktails-dto.model';
+import { convertCocktailDTO } from './convert-cocktail-dto';
 
 const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php';
 
@@ -34,11 +33,19 @@ export const useCocktailStore = defineStore('cocktail', () => {
           }) as Promise<CocktailsDto>
         )
       ),
-      map((a) => a.drinks?.map(convertCocktailDTO) || []),
+      map((a) => {
+        if (!Array.isArray(a.drinks)) {
+          throw new Error('data not found');
+        }
+        return a.drinks.map(convertCocktailDTO);
+      }),
       withLatestFrom(setSubject$),
-      catchError((e) => {
-        console.log(e);
-        return of([]);
+      catchError((e: Error) => {
+        showError({
+          statusCode: 500,
+          statusMessage: e.message || 'Something bad has happened',
+        });
+        return EMPTY;
       })
     )
     .subscribe(([response, code]) => {
@@ -46,8 +53,8 @@ export const useCocktailStore = defineStore('cocktail', () => {
       cocktails.value = response;
     });
 
-  const set = (newCode: string) => {
-    setSubject$.next(newCode || availableCocktails[0]);
+  const set = (code: string) => {
+    setSubject$.next(code);
   };
 
   return { set, currentCode, cocktails };
