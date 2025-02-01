@@ -6,17 +6,19 @@
           loading="lazy">
         <h2 class="text-3xl mb-6">{{ item.strDrink }}</h2>
         <section class="mb-6">
-          <span>{{ item.strCategory }}</span>
-          <span>{{ item.strAlcoholic }}</span>
-          <span>{{ item.strGlass }}</span>
+          <ul>
+            <li>{{ item.strCategory }}</li>
+            <li>{{ item.strAlcoholic }}</li>
+            <li>{{ item.strGlass }}</li>
+          </ul>
         </section>
         <section class="mb-6">
-          <h3>Instructions:</h3>
+          <h3 class="text-2xl mb-2">Instructions:</h3>
           <span>{{ item.strInstructions }}</span>
         </section>
         <section>
-          <h3>List of ingredients:</h3>
-          <dl>
+          <h3 class="text-2xl mb-2">List of ingredients:</h3>
+          <dl class="grid grid-cols-2">
             <template v-for="ingredient of item.ingredients" :key="ingredient">
               <dt>{{ ingredient.measure }}</dt>
               <dd>{{ ingredient.ingredient }}</dd>
