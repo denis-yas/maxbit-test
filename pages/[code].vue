@@ -28,14 +28,14 @@
 </template>
 
 <script setup lang="ts">
+import { availableCocktails } from '~/consts/availableCocktails.const';
 import { useCocktailStore } from "~/store/use-cocktail.store";
 
-// definePageMeta({
-//   validate: async (route) => {
-//     const result = typeof route.params.id === 'string' && /^\d+$/.test(route.params.id);
-//     return result;
-//   }
-// });
+definePageMeta({
+  validate: async (route) => {
+    return availableCocktails.includes(route.params.code as string);
+  }
+});
 
 
 const route = useRoute();
