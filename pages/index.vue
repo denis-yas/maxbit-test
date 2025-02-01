@@ -1,9 +1,9 @@
 <template>
   <div>
     <ul>
-      <li v-for="item of a" :key="item.strDrink">
+      <li v-for="item of store.cocktails" :key="item.strDrink">
         <h2>{{ item.strDrink }}</h2>
-        <img :src="item.strDrinkThumb" :alt="item.strImageAttribution">
+        <img :src="item.strDrinkThumb" height="400" width="400" :alt="item.strImageAttribution" loading="lazy">
         <section>
           <span>{{ item.strCategory }}</span>
           <span>{{ item.strAlcoholic }}</span>
@@ -29,12 +29,15 @@
 
 <script setup lang="ts">
 import { useCocktailStore } from "~/store/use-cocktail.store";
+
+definePageMeta({
+  validate: async (route) => {
+    return typeof route.params.id === 'string' && /^\d+$/.test(route.params.id)
+  }
+});
+
+
 const route = useRoute();
 const store = useCocktailStore();
 store.set(route.params.type as string);
-
-const a = computed(() => {
-  const a = store.cocktails;
-  return a;
-});
 </script>

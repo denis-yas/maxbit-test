@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia';
 import {
+  catchError,
   distinctUntilChanged,
   from,
   map,
+  of,
   Subject,
   switchMap,
   withLatestFrom,
@@ -33,7 +35,11 @@ export const useCocktailStore = defineStore('cocktail', () => {
         )
       ),
       map((a) => a.drinks?.map(convertCocktailDTO) || []),
-      withLatestFrom(setSubject$)
+      withLatestFrom(setSubject$),
+      catchError((e) => {
+        console.log(e);
+        return of([]);
+      })
     )
     .subscribe(([response, code]) => {
       currentCode.value = code;
