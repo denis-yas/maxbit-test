@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <ul>
+  <div class="relative">
+    <loading-indicator v-if="loadingStore.loading"
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+    <ul v-else>
       <li v-for="item of store.cocktails" :key="item.strDrink" class="mb-24 overflow-x-auto">
         <h2 class="text-3xl mb-6 sm:float-left">{{ item.strDrink }}</h2>
         <div class="mb-8 lg:ml-4 lg:mb-4 lg:float-right sm:max-w-[400px]">
@@ -34,6 +36,7 @@
 <script setup lang="ts">
 import { availableCocktails } from '~/consts/availableCocktails.const';
 import { useCocktailStore } from "~/store/use-cocktail.store";
+import { useLoadingIndicatorStore } from "~/store/use-loading-indicator-store";
 
 definePageMeta({
   validate: async (route) => {
@@ -44,5 +47,6 @@ definePageMeta({
 
 const route = useRoute();
 const store = useCocktailStore();
+const loadingStore = useLoadingIndicatorStore();
 store.set(route.params.code as string);
 </script>

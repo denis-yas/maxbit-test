@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import {
   catchError,
+  delay,
   distinctUntilChanged,
   EMPTY,
   from,
@@ -8,6 +9,7 @@ import {
   of,
   Subject,
   switchMap,
+  tap,
   withLatestFrom,
 } from "rxjs";
 import { testData } from "~/mocks/response";
@@ -15,6 +17,7 @@ import { testData } from "~/mocks/response";
 import type { Cocktail } from "~/entities/cocktail.model";
 import type { CocktailsDto } from "~/entities/cocktails-dto.model";
 import { convertCocktailDTO } from "./convert-cocktail-dto";
+import { useLoadingIndicatorStore } from "./use-loading-indicator-store";
 
 const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php";
 
@@ -22,20 +25,23 @@ export const useCocktailStore = defineStore("cocktail", () => {
   const currentCode: Ref<string> = ref("");
   const cocktails: Ref<Cocktail[]> = ref([]);
   const setSubject$ = new Subject<string>();
+  const loadingIndicator = useLoadingIndicatorStore();
 
   setSubject$
     .pipe(
       distinctUntilChanged(),
-      // map(() => testData),
-      switchMap((newCode) =>
-        from(
-          $fetch(url, {
-            query: {
-              s: newCode,
-            },
-          }) as Promise<CocktailsDto>
-        )
-      ),
+      tap(() => loadingIndicator.set(true)),
+      map(() => testData),
+      delay(100),
+      // switchMap((newCode) =>
+      //   from(
+      //     $fetch(url, {
+      //       query: {
+      //         s: newCode,
+      //       },
+      //     }) as Promise<CocktailsDto>
+      //   )
+      // ),
       map((a) => {
         if (!Array.isArray(a.drinks)) {
           throw new Error(a.drinks);
@@ -54,6 +60,7 @@ export const useCocktailStore = defineStore("cocktail", () => {
     .subscribe(([response, code]) => {
       currentCode.value = code;
       cocktails.value = response;
+      loadingIndicator.set(false);
     });
 
   const set = (code: string) => {
