@@ -2,8 +2,8 @@
   <nav>
     <ul>
       <li v-for="item of availableCocktails" :key="item" class="h-16">
-        <NuxtLink :to="{ path: '/' + item }" active-class="!bg-red-700 t" class="pl-4 pr-4 bg-sky-500
-           hover:bg-sky-700 h-full capitalize flex items-center text-2xl">
+        <NuxtLink :to="{ path: '/' + item }" active-class="!bg-slate-400 text-white" class="pl-8 pr-8 bg-slate-100
+           hover:bg-slate-200 h-full capitalize flex items-center text-2xl">
           {{ item }}</NuxtLink>
       </li>
     </ul>
