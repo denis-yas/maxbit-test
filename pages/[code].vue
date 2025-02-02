@@ -2,8 +2,9 @@
   <div>
     <ul>
       <li v-for="item of store.cocktails" :key="item.strDrink" class="mb-24 overflow-x-auto">
-        <img :src="item.strDrinkThumb" height="400" width="400" :alt="item.strImageAttribution" class="float-right"
-          loading="lazy">
+        <div class="mb-8 lg:ml-4 flex justify-center lg:float-right sm:max-w-[400px]">
+          <img :src="item.strDrinkThumb" :alt="item.strImageAttribution" loading="lazy">
+        </div>
         <h2 class="text-3xl mb-6">{{ item.strDrink }}</h2>
         <section class="mb-6">
           <ul>
@@ -16,9 +17,9 @@
           <h3 class="text-2xl mb-2">Instructions:</h3>
           <span>{{ item.strInstructions }}</span>
         </section>
-        <section>
+        <section class="lg:clear-right">
           <h3 class="text-2xl mb-2">List of ingredients:</h3>
-          <dl class="grid grid-cols-2">
+          <dl class="inline-grid gap-4 grid-cols-2 break-words auto-cols-min">
             <template v-for="ingredient of item.ingredients" :key="ingredient">
               <dt>{{ ingredient.measure }}</dt>
               <dd>{{ ingredient.ingredient }}</dd>
