@@ -1,18 +1,15 @@
 import { defineStore } from "pinia";
 import {
   catchError,
-  delay,
   distinctUntilChanged,
   EMPTY,
   from,
   map,
-  of,
   Subject,
   switchMap,
   tap,
   withLatestFrom,
 } from "rxjs";
-import { testData } from "~/mocks/response";
 
 import type { Cocktail } from "~/entities/cocktail.model";
 import type { CocktailsDto } from "~/entities/cocktails-dto.model";
@@ -31,17 +28,15 @@ export const useCocktailStore = defineStore("cocktail", () => {
     .pipe(
       distinctUntilChanged(),
       tap(() => loadingIndicator.set(true)),
-      map(() => testData),
-      delay(100),
-      // switchMap((newCode) =>
-      //   from(
-      //     $fetch(url, {
-      //       query: {
-      //         s: newCode,
-      //       },
-      //     }) as Promise<CocktailsDto>
-      //   )
-      // ),
+      switchMap((newCode) =>
+        from(
+          $fetch(url, {
+            query: {
+              s: newCode,
+            },
+          }) as Promise<CocktailsDto>
+        )
+      ),
       map((a) => {
         if (!Array.isArray(a.drinks)) {
           throw new Error(a.drinks);
