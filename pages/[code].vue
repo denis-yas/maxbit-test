@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li v-for="item of store.cocktails" :key="item.strDrink" class="mb-24 overflow-x-auto">
-        <div class="mb-8 lg:ml-4 flex justify-center lg:float-right sm:max-w-[400px]">
+        <div class="mb-8 lg:ml-4 lg:mb-4 lg:float-right sm:max-w-[400px]">
           <img :src="item.strDrinkThumb" :alt="item.strImageAttribution" loading="lazy">
         </div>
         <h2 class="text-3xl mb-6">{{ item.strDrink }}</h2>
