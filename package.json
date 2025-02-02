@@ -11,7 +11,10 @@
     "lint": "yarn lint:eslint && yarn lint:prettier",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier . --check",
-    "lintfix": "eslint . --fix && prettier --write --list-different ."
+    "lintfix": "eslint . --fix && prettier --write --list-different .",
+    "deploy:deploy": "aws --endpoint-url=https://storage.yandexcloud.net/ s3 cp --recursive .output/public/ s3://maxbit-test",
+    "deploy:empty": "aws --endpoint-url=https://storage.yandexcloud.net/ s3 rm s3://maxbit-test --recursive",
+    "deploy": "npm run deploy:empty && npm run deploy:deploy"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.9.0",
