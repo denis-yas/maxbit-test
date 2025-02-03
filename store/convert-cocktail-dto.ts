@@ -1,9 +1,9 @@
-import type { CocktailDto } from '~/entities/cocktail-dto.model';
-import type { Cocktail } from '~/entities/cocktail.model';
+import type { CocktailDto } from "~/entities/cocktail-dto.model";
+import type { Cocktail } from "~/entities/cocktail.model";
 
 export const convertCocktailDTO = (cocktail: CocktailDto): Cocktail => {
-  const sources = getArrayFromProperty('strIngredient', cocktail);
-  const measures = getArrayFromProperty('strMeasure', cocktail);
+  const sources = getArrayFromProperty("strIngredient", cocktail);
+  const measures = getArrayFromProperty("strMeasure", cocktail);
   const ingredients = sources
     .map((source, index) => ({
       ingredient: source,
