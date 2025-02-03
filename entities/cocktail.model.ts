@@ -1,4 +1,4 @@
-import type { CocktailDto } from './cocktail-dto.model';
+import type { CocktailDto } from "./cocktail-dto.model";
 
 type Ingredient = {
   ingredient: string;

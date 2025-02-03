@@ -1,7 +1,9 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
-export const useLoadingIndicatorStore = defineStore('loading', () => {
+export const useLoadingIndicatorStore = defineStore("loading", () => {
   const loading = ref(true);
-  const set = (value: boolean) => { loading.value = value };
-  return { loading, set};
+  const set = (value: boolean) => {
+    loading.value = value;
+  };
+  return { loading, set };
 });

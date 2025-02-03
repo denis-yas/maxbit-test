@@ -31,8 +31,8 @@ export type CocktailDto = {
   strInstructionsES: string | null;
   strInstructionsFR: string | null;
   strInstructionsIT: string | null;
-  'strInstructionsZH-HANS': string | null;
-  'strInstructionsZH-HANT': string | null;
+  "strInstructionsZH-HANS": string | null;
+  "strInstructionsZH-HANT": string | null;
   strMeasure1: string | null;
   strMeasure2: string | null;
   strMeasure3: string | null;

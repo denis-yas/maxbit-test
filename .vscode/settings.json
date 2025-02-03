@@ -8,5 +8,5 @@
     "strings": "on"
   },
   "tailwindCSS.experimental.configFile": ".nuxt/tailwind/postcss.mjs",
-   "liveServer.settings.root": ".output/public"
+  "liveServer.settings.root": ".output/public"
 }

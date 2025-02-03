@@ -1,12 +1,22 @@
 <template>
   <div class="relative">
-    <loading-indicator v-if="loadingStore.loading"
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+    <loading-indicator
+      v-if="loadingStore.loading"
+      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+    />
     <ul v-else>
-      <li v-for="item of store.cocktails" :key="item.strDrink" class="mb-24 overflow-x-auto">
-        <h2 class="text-3xl mb-6 sm:float-left">{{ item.strDrink }}</h2>
-        <div class="mb-8 lg:ml-4 lg:mb-4 lg:float-right sm:max-w-[400px]">
-          <img :src="item.strDrinkThumb" :alt="item.strImageAttribution" loading="lazy">
+      <li
+        v-for="item of store.cocktails"
+        :key="item.strDrink"
+        class="mb-24 overflow-x-auto"
+      >
+        <h2 class="mb-6 text-3xl sm:float-left">{{ item.strDrink }}</h2>
+        <div class="mb-8 sm:max-w-[400px] lg:float-right lg:mb-4 lg:ml-4">
+          <img
+            :src="item.strDrinkThumb"
+            :alt="item.strImageAttribution"
+            loading="lazy"
+          />
         </div>
         <section class="mb-6 sm:clear-left">
           <ul>
@@ -16,12 +26,12 @@
           </ul>
         </section>
         <section class="mb-6">
-          <h3 class="text-2xl mb-2">Instructions:</h3>
+          <h3 class="mb-2 text-2xl">Instructions:</h3>
           <span>{{ item.strInstructions }}</span>
         </section>
         <section class="lg:clear-right">
-          <h3 class="text-2xl mb-2">List of ingredients:</h3>
-          <dl class="inline-grid gap-4 grid-cols-2 break-words auto-cols-min">
+          <h3 class="mb-2 text-2xl">List of ingredients:</h3>
+          <dl class="inline-grid auto-cols-min grid-cols-2 gap-4 break-words">
             <template v-for="ingredient of item.ingredients" :key="ingredient">
               <dt>{{ ingredient.measure }}</dt>
               <dd>{{ ingredient.ingredient }}</dd>
@@ -34,16 +44,15 @@
 </template>
 
 <script setup lang="ts">
-import { availableCocktails } from '~/consts/availableCocktails.const';
+import { availableCocktails } from "~/consts/availableCocktails.const";
 import { useCocktailStore } from "~/store/use-cocktail.store";
 import { useLoadingIndicatorStore } from "~/store/use-loading-indicator-store";
 
 definePageMeta({
   validate: async (route) => {
     return availableCocktails.includes(route.params.code as string);
-  }
+  },
 });
-
 
 const route = useRoute();
 const store = useCocktailStore();

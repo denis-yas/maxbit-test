@@ -34,8 +34,8 @@ export const useCocktailStore = defineStore("cocktail", () => {
             query: {
               s: newCode,
             },
-          }) as Promise<CocktailsDto>
-        )
+          }) as Promise<CocktailsDto>,
+        ),
       ),
       map((a) => {
         if (!Array.isArray(a.drinks)) {
