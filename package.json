@@ -14,7 +14,8 @@
     "lintfix": "eslint . --fix && prettier --write --list-different .",
     "deploy:deploy": "aws --endpoint-url=https://storage.yandexcloud.net/ s3 cp --recursive .output/public/ s3://maxbit-test",
     "deploy:empty": "aws --endpoint-url=https://storage.yandexcloud.net/ s3 rm s3://maxbit-test --recursive",
-    "deploy": "npm run deploy:empty && npm run deploy:deploy"
+    "deploy": "npm run deploy:empty && npm run deploy:deploy",
+    "test": "vitest"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.9.0",
@@ -26,12 +27,16 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.0.0",
+    "@nuxt/test-utils": "^3.15.4",
     "@nuxtjs/tailwindcss": "^6.13.1",
+    "@vue/test-utils": "^2.4.6",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
+    "happy-dom": "^16.8.1",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
   }
 }
